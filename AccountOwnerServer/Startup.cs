@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AccountOwnerServer.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace AccountOwnerServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.ConfigureCors(); // added from ServiceExtensions
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

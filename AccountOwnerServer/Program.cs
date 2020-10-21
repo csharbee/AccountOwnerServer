@@ -11,16 +11,17 @@ namespace AccountOwnerServer
 {
     public class Program
     {
+        // Absolutely Begin First There
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            Host.CreateDefaultBuilder(args)     // Use this to configure app the app configuration, logging, and dependency injection contrainer
+                .ConfigureWebHostDefaults(webBuilder =>  // Use Kestrel Configuration, and using the Startup Class, middleware pipeline
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>(); // Startup class which we configure embedded or custom services that our application needs. 
                 });
     }
 }
