@@ -33,6 +33,8 @@ namespace AccountOwnerServer
             services.ConfigureLoggerService();
             services.AddControllers();
             services.ConfigureCors(); // added from ServiceExtensions. We added Cors Configuration there.
+            services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepositoryWrapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

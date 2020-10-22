@@ -19,7 +19,7 @@
     },
     "AccountOwnerServer": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "applicationUrl": "https://localhost:4723",
       "environmentVariables": {
