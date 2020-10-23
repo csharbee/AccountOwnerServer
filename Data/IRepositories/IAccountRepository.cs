@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.IRepositories
 {
-    interface IAccountRepository: IRepositoryBase<Account>
+    public interface IAccountRepository : IRepositoryBase<Account>
     {
     }
 }

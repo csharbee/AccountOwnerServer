@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Data.Repository
 {
-    public class OwnerRepository : RepositoryBase<Owner>, IOwnerRepository
+    public class AccountRepository : RepositoryBase<Account>, IAccountRepository
     {
-        public OwnerRepository(Context context) : base(context)
+        public AccountRepository(Context context) : base(context)
         {
         }
     }
