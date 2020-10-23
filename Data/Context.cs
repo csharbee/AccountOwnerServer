@@ -13,7 +13,5 @@ namespace Data
         }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-       => optionsBuilder.UseNpgsql("Host=localhost;Database=CodeMaze;Username=postgres;Password=ankara06");
     }
 }

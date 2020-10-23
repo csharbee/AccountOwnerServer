@@ -34,10 +34,9 @@ namespace AccountOwnerServer.Extensions
         }
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration config)
         {
-            var sqlCon = config["DbConnection:connectionString"];
-
-            services.AddDbContext<Context>(options =>
-                    options.UseNpgsql(sqlCon));
+            var connectionString = config.GetSection("DbConnection").GetSection("connectionString");
+            services.AddEntityFrameworkNpgsql()
+                    .AddDbContext<Context>(options => options.UseNpgsql(connectionString.Value));
         }
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
