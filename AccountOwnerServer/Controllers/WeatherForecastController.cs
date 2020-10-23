@@ -15,21 +15,19 @@ namespace AccountOwnerServer.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private IRepositoryBase<Owner> _repositoryBase;
-        private Context Context;
+        private IRepositoryWrapper _wrapper;
         private readonly ILoggerManager _logger;
-        public WeatherForecastController(ILoggerManager logger, Context context)
+        public WeatherForecastController(ILoggerManager logger, IRepositoryWrapper wrapper)
         {
-            Context = context;
             _logger = logger;
-            _repositoryBase = new RepositoryBase<Owner>(Context);
+            _wrapper = wrapper;
         }
 
         [HttpGet]
         public IEnumerable<Owner> Get()
         {
             _logger.LogInfo($"Get Request!");
-            return _repositoryBase.FindAll();
+            return _wrapper.OwnerRepository.FindAll();
         }
     }
 }

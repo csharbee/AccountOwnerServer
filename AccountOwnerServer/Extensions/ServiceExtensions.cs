@@ -40,7 +40,7 @@ namespace AccountOwnerServer.Extensions
         }
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
-            services.AddTransient<IOwnerRepository, OwnerRepository>();
+            services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }
