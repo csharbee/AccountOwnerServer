@@ -19,12 +19,12 @@ namespace Data.Repository
         }
         public void Create(T model)
         {
-            throw new NotImplementedException();
+            DbSet.Add(model);
         }
 
         public void Delete(T model)
         {
-            throw new NotImplementedException();
+            DbSet.Remove(model);
         }
 
         public IQueryable<T> FindAll()
@@ -34,12 +34,12 @@ namespace Data.Repository
 
         public IQueryable<T> FindByContition(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return DbSet.Where(expression);
         }
 
         public void Update(T model)
         {
-            throw new NotImplementedException();
+            DbSet.Update(model);
         }
     }
 }
