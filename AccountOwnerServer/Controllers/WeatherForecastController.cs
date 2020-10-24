@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace AccountOwnerServer.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private IRepositoryWrapper _wrapper;

@@ -30,8 +30,8 @@ namespace AccountOwnerServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureLoggerService();
             services.AddControllers();
+            services.ConfigureLoggerService();
             services.ConfigureCors(); // added from ServiceExtensions. We added Cors Configuration there.
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
