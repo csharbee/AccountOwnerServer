@@ -7,9 +7,10 @@ using System.Text;
 
 namespace Data.IRepositories
 {
-    public interface IOwnerRepository: IRepositoryBase<Owner>
+    public interface IOwnerRepository : IRepositoryBase<Owner>
     {
         IEnumerable<Owner> GetOwnersOrderByName();
         Owner GetOwnerById(string Id);
+        Owner GetOwnerWithDetails(string ownerId);
     }
 }

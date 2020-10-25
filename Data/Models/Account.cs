@@ -9,13 +9,13 @@ namespace Data.Models
     [Table("Account")]
     public class Account
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         
         [Required(ErrorMessage = "Date created is required")]
         public DateTime DateCreated { get; set; }
         
         [Required(ErrorMessage = "Account type is required")]
         public string AccountType { get; set; }
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
     }
 }
