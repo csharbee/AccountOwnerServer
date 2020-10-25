@@ -1,5 +1,6 @@
 ﻿using Data.IRepositories;
 using Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,13 @@ namespace Data.Repository
         public IEnumerable<Owner> GetOwnersOrderByName()
         {
             return FindAll().OrderBy(m => m.Name).ToList();
+        }
+
+        public Owner GetOwnerWithDetails(string ownerId)
+        {
+            return FindByContition(m => m.Id == ownerId)
+                    .Include(m => m.Accounts)
+                    .FirstOrDefault();
         }
     }
 }

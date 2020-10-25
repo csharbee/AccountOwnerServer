@@ -7,8 +7,8 @@ namespace Data
 {
     public interface IRepositoryWrapper
     {
-        IOwnerRepository OwnerRepository { get; }
-        IAccountRepository AccountRepository { get; }
+        IOwnerRepository Owner { get; }
+        IAccountRepository Account { get; }
         void Commit();
     }
 }

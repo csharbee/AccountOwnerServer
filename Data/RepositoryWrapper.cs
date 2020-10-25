@@ -15,7 +15,7 @@ namespace Data
         {
             _context = context;
         }
-        public IOwnerRepository OwnerRepository
+        public IOwnerRepository Owner
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Data
             }
         }
 
-        public IAccountRepository AccountRepository
+        public IAccountRepository Account
         {
             get
             {
