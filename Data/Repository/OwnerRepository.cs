@@ -14,6 +14,11 @@ namespace Data.Repository
         {
         }
 
+        public Owner GetOwnerById(string Id)
+        {
+            return FindByContition(m => m.Id == Id).FirstOrDefault();
+        }
+
         public IEnumerable<Owner> GetOwnersOrderByName()
         {
             return FindAll().OrderBy(m => m.Name).ToList();
