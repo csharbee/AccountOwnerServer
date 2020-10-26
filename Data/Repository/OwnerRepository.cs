@@ -15,7 +15,7 @@ namespace Data.Repository
         {
         }
 
-        public Owner GetOwnerById(string Id)
+        public Owner GetOwnerById(Guid Id)
         {
             return FindByContition(m => m.Id == Id).FirstOrDefault();
         }
@@ -25,7 +25,7 @@ namespace Data.Repository
             return FindAll().OrderBy(m => m.Name).ToList();
         }
 
-        public Owner GetOwnerWithDetails(string ownerId)
+        public Owner GetOwnerWithDetails(Guid ownerId)
         {
             return FindByContition(m => m.Id == ownerId)
                     .Include(m => m.Accounts)

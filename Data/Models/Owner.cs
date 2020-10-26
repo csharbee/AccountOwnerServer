@@ -9,8 +9,7 @@ namespace Data.Models
     [Table("Owner")]
     public class Owner
     {
-        // I will change string to Guid
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [StringLength(60, ErrorMessage = "Name cannot be longer than 60 characters")]

@@ -42,7 +42,7 @@ namespace AccountOwnerServer.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetOwnerById(string Id)
+        public IActionResult GetOwnerById(Guid Id)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace AccountOwnerServer.Controllers
             }
         }
         [HttpGet("{id}/account")]
-        public IActionResult GetOwnerWithDetails(string id)
+        public IActionResult GetOwnerWithDetails(Guid id)
         {
             try
             {

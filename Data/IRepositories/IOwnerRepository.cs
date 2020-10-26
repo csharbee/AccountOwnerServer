@@ -10,7 +10,7 @@ namespace Data.IRepositories
     public interface IOwnerRepository : IRepositoryBase<Owner>
     {
         IEnumerable<Owner> GetOwnersOrderByName();
-        Owner GetOwnerById(string Id);
-        Owner GetOwnerWithDetails(string ownerId);
+        Owner GetOwnerById(Guid Id);
+        Owner GetOwnerWithDetails(Guid ownerId);
     }
 }
