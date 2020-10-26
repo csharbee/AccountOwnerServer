@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace Data.Repository
 {
@@ -35,6 +33,11 @@ namespace Data.Repository
             return FindByContition(m => m.Id == ownerId)
                     .Include(m => m.Accounts)
                     .FirstOrDefault();
+        }
+
+        public void UpdateOwner(Owner owner)
+        {
+            Update(owner);
         }
     }
 }

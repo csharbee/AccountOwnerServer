@@ -2,8 +2,6 @@
 using Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Data.IRepositories
 {
@@ -13,5 +11,6 @@ namespace Data.IRepositories
         Owner GetOwnerById(Guid Id);
         Owner GetOwnerWithDetails(Guid ownerId);
         void CreateOwner(Owner owner);
+        void UpdateOwner(Owner owner);
     }
 }

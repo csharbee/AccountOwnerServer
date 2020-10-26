@@ -40,7 +40,7 @@ namespace AccountOwnerServer.Controllers
             }
         }
 
-        [HttpGet("{id}", Name ="OwnerById")]
+        [HttpGet("{id}", Name = "OwnerById")]
         public IActionResult GetOwnerById(Guid Id)
         {
             try
@@ -115,6 +115,39 @@ namespace AccountOwnerServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside CreateOwner action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateOwner(Guid id, [FromBody]OwnerUpdateDto owner)
+        {
+            try
+            {
+                if (owner == null)
+                {
+                    _logger.LogError("Owner object sent from client is null.");
+                    return BadRequest("Owner object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid owner object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+                var ownerEntity = _repository.Owner.GetOwnerById(id);
+                if (ownerEntity == null)
+                {
+                    _logger.LogError($"Owner with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
+                _mapper.Map(owner, ownerEntity);
+                _repository.Owner.UpdateOwner(ownerEntity);
+                _repository.Commit();
+                return NoContent(); // return 204 
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateOwner action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
