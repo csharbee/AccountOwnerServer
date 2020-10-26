@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Contracts;
 using Data;
+using Data.DataTransferObjects;
 using Data.Models;
 using Data.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace AccountOwnerServer.Controllers
 {
@@ -93,7 +91,7 @@ namespace AccountOwnerServer.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateOwner([FromBody]OwnerCreateDTO owner)
+        public IActionResult CreateOwner([FromBody]OwnerCreateDto owner)
         {
             try
             {
@@ -111,6 +109,7 @@ namespace AccountOwnerServer.Controllers
                 _repository.Owner.CreateOwner(ownerEntity);
                 _repository.Commit();
                 var createdOwner = _mapper.Map<OwnerViewModel>(ownerEntity);
+                // CreatedAtRoute return 201 for creation so we can see this is a create operation.
                 return CreatedAtRoute("OwnerById", new { id = createdOwner.Id }, createdOwner);
             }
             catch (Exception ex)
