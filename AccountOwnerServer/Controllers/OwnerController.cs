@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
 using Data;
+using Data.Models;
 using Data.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +42,7 @@ namespace AccountOwnerServer.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="OwnerById")]
         public IActionResult GetOwnerById(Guid Id)
         {
             try
@@ -88,6 +89,33 @@ namespace AccountOwnerServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetOwnerWithDetails action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpPost]
+        public IActionResult CreateOwner([FromBody]OwnerCreateDTO owner)
+        {
+            try
+            {
+                if (owner == null)
+                {
+                    _logger.LogError("Owner object sent from client is null.");
+                    return BadRequest("Owner object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid owner object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+                var ownerEntity = _mapper.Map<Owner>(owner);
+                _repository.Owner.CreateOwner(ownerEntity);
+                _repository.Commit();
+                var createdOwner = _mapper.Map<OwnerViewModel>(ownerEntity);
+                return CreatedAtRoute("OwnerById", new { id = createdOwner.Id }, createdOwner);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside CreateOwner action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
