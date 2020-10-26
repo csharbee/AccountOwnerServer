@@ -12,5 +12,6 @@ namespace Data.IRepositories
         IEnumerable<Owner> GetOwnersOrderByName();
         Owner GetOwnerById(Guid Id);
         Owner GetOwnerWithDetails(Guid ownerId);
+        void CreateOwner(Owner owner);
     }
 }

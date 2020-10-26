@@ -15,6 +15,11 @@ namespace Data.Repository
         {
         }
 
+        public void CreateOwner(Owner owner)
+        {
+            Create(owner);
+        }
+
         public Owner GetOwnerById(Guid Id)
         {
             return FindByContition(m => m.Id == Id).FirstOrDefault();

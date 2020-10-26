@@ -41,7 +41,7 @@ namespace Data
 
         public void Commit()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
