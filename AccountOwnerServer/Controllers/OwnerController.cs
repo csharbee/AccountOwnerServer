@@ -151,5 +151,27 @@ namespace AccountOwnerServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteOwner(Guid id)
+        {
+            try
+            {
+                var entity = _repository.Owner.GetOwnerById(id);
+                if (entity == null)
+                {
+                    _logger.LogInfo($"This entity not found with id: {id}");
+                    return NotFound();
+                }
+                _repository.Owner.Delete(entity);
+                _repository.Commit();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteOwner action: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace Data.Repository
             Create(owner);
         }
 
+        public void DeleteOwner(Owner owner)
+        {
+            Delete(owner);
+        }
+
         public Owner GetOwnerById(Guid Id)
         {
             return FindByContition(m => m.Id == Id).FirstOrDefault();
