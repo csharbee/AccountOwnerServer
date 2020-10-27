@@ -7,6 +7,7 @@ using Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AccountOwnerServer.Controllers
 {
@@ -161,6 +162,12 @@ namespace AccountOwnerServer.Controllers
                 {
                     _logger.LogInfo($"This entity not found with id: {id}");
                     return NotFound();
+                }
+                var accountsByOwner = _repository.Account.AccountsByOwner(id);
+                if (accountsByOwner.Any())
+                {
+                    _logger.LogError($"Cannot delete owner with id: {id}. It has related accounts. Delete those accounts first");
+                    return BadRequest("Cannot delete owner. It has related accounts. Delete those accounts first");
                 }
                 _repository.Owner.Delete(entity);
                 _repository.Commit();

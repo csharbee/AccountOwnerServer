@@ -8,5 +8,6 @@ namespace Data.IRepositories
 {
     public interface IAccountRepository : IRepositoryBase<Account>
     {
+        IEnumerable<Account> AccountsByOwner(Guid ownerId);
     }
 }

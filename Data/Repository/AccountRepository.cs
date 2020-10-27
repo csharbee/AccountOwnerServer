@@ -13,5 +13,10 @@ namespace Data.Repository
         public AccountRepository(Context context) : base(context)
         {
         }
+
+        public IEnumerable<Account> AccountsByOwner(Guid ownerId)
+        {
+            return FindByContition(m => m.OwnerId == ownerId).ToList();
+        }
     }
 }
