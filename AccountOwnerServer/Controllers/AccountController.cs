@@ -29,31 +29,46 @@ namespace AccountOwnerServer.Controllers
         [HttpGet]
         public IActionResult GetAccounts()
         {
+            var model = new BaseModel() { Success = false, Message = "Get All Accounts Information!", InternalMessage = "This message for front-end developers" };
             try
             {
                 var accounts = _repository.Account.GetAccounts();
-                return Ok(accounts);
+                var accountViewModels = _mapper.Map<IEnumerable<AccountViewModel>>(accounts);
+                model.Data = accountViewModels;
+                model.Success = true;
+                return Ok(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Internal Server Error");
+                model.InternalMessage = ex.Message;
+                model.Message = "There is an error occured";
+                _logger.LogError($"Error:{ex.Message}");
+
+                return StatusCode(500, model);
             }
         }
         [HttpGet("{id}", Name = "GetAccount")]
         public IActionResult GetAccount(Guid id)
         {
+            var model = new BaseModel() { Success = false, Message = "Get All Accounts Information!", InternalMessage = "This message for front-end developers" };
             try
             {
                 var account = _repository.Account.GetAccountById(id);
                 if (account == null)
                 {
-                    return NotFound();
+                    model.Success = false;
+                    return NotFound(model);
                 }
-                return Ok(account);
+
+                model.Data = _mapper.Map<AccountViewModel>(account);
+                model.Success = true;
+                return Ok(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Internal Server Error");
+                model.InternalMessage = ex.Message;
+                model.Message = $"An Error Occured When Get Repuest With Id:{id}";
+                return StatusCode(500, model);
             }
         }
         [HttpPost]
