@@ -33,5 +33,10 @@ namespace Data.Repository
         {
             return FindAll().OrderBy(m => m.AccountType).ToList();
         }
+
+        public void UpdateAccount(Account account)
+        {
+            Update(account);
+        }
     }
 }

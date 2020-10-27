@@ -121,11 +121,11 @@ namespace AccountOwnerServer.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateOwner(Guid id, [FromBody]OwnerUpdateDto owner)
+        public IActionResult UpdateOwner(Guid id, [FromBody]OwnerUpdateDto ownerUpdateDto)
         {
             try
             {
-                if (owner == null)
+                if (ownerUpdateDto == null)
                 {
                     _logger.LogError("Owner object sent from client is null.");
                     return BadRequest("Owner object is null");
@@ -135,14 +135,14 @@ namespace AccountOwnerServer.Controllers
                     _logger.LogError("Invalid owner object sent from client.");
                     return BadRequest("Invalid model object");
                 }
-                var ownerEntity = _repository.Owner.GetOwnerById(id);
-                if (ownerEntity == null)
+                var owner = _repository.Owner.GetOwnerById(id);
+                if (owner == null)
                 {
                     _logger.LogError($"Owner with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
-                _mapper.Map(owner, ownerEntity);
-                _repository.Owner.UpdateOwner(ownerEntity);
+                _mapper.Map(ownerUpdateDto, owner);
+                _repository.Owner.UpdateOwner(owner);
                 _repository.Commit();
                 return NoContent(); // return 204 
             }

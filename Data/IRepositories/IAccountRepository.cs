@@ -11,6 +11,8 @@ namespace Data.IRepositories
         IEnumerable<Account> GetAccounts();
         IEnumerable<Account> AccountsByOwner(Guid ownerId);
         void CreateAccount(Account account);
+        void UpdateAccount(Account account);
+
         Account GetAccountById(Guid id);
     }
 }

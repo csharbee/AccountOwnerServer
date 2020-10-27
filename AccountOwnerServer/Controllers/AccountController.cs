@@ -81,5 +81,35 @@ namespace AccountOwnerServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult UpdateAccount(Guid id, [FromBody] AccountUpdateDto accountUpdateDto)
+        {
+            try
+            {
+                if (accountUpdateDto == null)
+                {
+                    return BadRequest("accountUpdateDto is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("accountUpdateDto is not valid");
+                }
+                var account = _repository.Account.GetAccountById(id);
+                if (account == null)
+                {
+                    return NotFound($"Entity is not found by id: {id}");
+                }
+                _mapper.Map(accountUpdateDto, account);
+                _repository.Account.UpdateAccount(account);
+                _repository.Commit();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }
