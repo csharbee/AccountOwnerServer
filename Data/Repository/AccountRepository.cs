@@ -18,5 +18,20 @@ namespace Data.Repository
         {
             return FindByContition(m => m.OwnerId == ownerId).ToList();
         }
+
+        public void CreateAccount(Account account)
+        {
+            Create(account);
+        }
+
+        public Account GetAccountById(Guid id)
+        {
+            return FindByContition(m => m.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<Account> GetAccounts()
+        {
+            return FindAll().OrderBy(m => m.AccountType).ToList();
+        }
     }
 }
